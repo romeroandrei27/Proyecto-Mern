@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plataforma Académica - Entregas</title>
+
+  <!-- CSS base + específico (buena práctica de cascada) -->
+  <link rel="stylesheet" href="estilos_base.css" />
+  <link rel="stylesheet" href="estilos.css" />
+</head>
+
+<body>
+  <!-- Accesibilidad: salto directo a la lista -->
+  <a class="sr-only sr-only-focusable" href="#listaEntregas">
+    Ir a la lista de entregas 📋
+  </a>
+
+  <main class="contenedor">
+    <h1>📚 Plataforma Académica</h1>
+    <p class="texto-chico">
+      Entrega de tareas y exámenes (SPA con CRUD)
+    </p>
+
+    <!-- FORMULARIO DE ENTREGA -->
+    <section class="panel">
+      <form id="formularioEntrega" novalidate>
+        <label for="tituloEntrega">Título de la entrega</label>
+        <input
+          id="tituloEntrega"
+          type="text"
+          placeholder="Ej. Examen Unidad 2"
+          aria-describedby="textoError"
+        />
+
+        <label for="descripcionEntrega">Descripción</label>
+        <textarea
+          id="descripcionEntrega"
+          rows="3"
+          placeholder="Indicaciones o descripción de la tarea"
+          aria-describedby="textoError"
+        ></textarea>
+
+        <label for="alumnoEntrega">Alumno</label>
+        <input
+          id="alumnoEntrega"
+          type="text"
+          placeholder="Nombre del alumno"
+          aria-describedby="textoError"
+        />
+
+        <div id="textoError" class="error" role="alert"></div>
+
+        <!-- UX: se habilita solo si pasa validación -->
+        <button type="submit" id="btnGuardar" disabled>
+          Guardar entrega
+        </button>
+
+        <p id="mensaje" class="texto-chico" aria-live="polite">
+          Listo.
+        </p>
+      </form>
+    </section>
+
+    <!-- LISTA DE ENTREGAS -->
+    <section class="panel panel-separacion">
+      <h2>📋 Entregas registradas</h2>
+
+      <ul id="listaEntregas">
+        <!-- Generado dinámicamente -->
+      </ul>
+
+      <p id="textoVacio" class="texto-chico">
+        Aún no hay entregas registradas.
+      </p>
+    </section>
+  </main>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
+
