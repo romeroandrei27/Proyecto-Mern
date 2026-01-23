@@ -1,16 +1,28 @@
+body {
+  font-family: sans-serif;
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 0 20px;
+  background-color: #f0f2f5;
+}
+
 h1 {
   text-align: center;
+  color: #333;
 }
 
 .panel {
-  background: #f4f6f8;
-  padding: 16px;
+  background: #fff;
+  padding: 20px;
   border-radius: 12px;
   box-shadow: 0 2px 6px rgba(0,0,0,.08);
+  margin-bottom: 20px;
 }
 
 .panel-separacion {
-  margin-top: 24px;
+  margin: 24px 0;
+  border: 0;
+  border-top: 1px solid #ccc;
 }
 
 label {
@@ -19,33 +31,31 @@ label {
   font-weight: 600;
 }
 
-input,
-textarea {
+input, textarea {
   width: 100%;
-  padding: 8px;
-  margin-top: 4px;
+  padding: 10px;
+  margin-top: 6px;
   border-radius: 8px;
   border: 1px solid #ccc;
+  box-sizing: border-box; /* Importante para el ancho */
 }
 
 button {
+  width: 100%;
   margin-top: 16px;
-  padding: 10px;
+  padding: 12px;
   border-radius: 10px;
   border: none;
   background: #2b7cff;
   color: white;
+  font-weight: bold;
   cursor: pointer;
+  transition: background 0.3s;
 }
 
 button:disabled {
   background: #999;
   cursor: not-allowed;
-}
-
-.error {
-  color: #b00020;
-  margin-top: 8px;
 }
 
 ul {
@@ -54,33 +64,17 @@ ul {
 }
 
 li {
-  background: #fff;
-  padding: 12px;
+  background: #f9f9f9;
+  padding: 15px;
   margin-bottom: 12px;
   border-radius: 10px;
-  box-shadow: 0 1px 4px rgba(0,0,0,.08);
-}
-
-.fila-acciones {
-  margin-top: 8px;
-}
-
-.boton-chico {
-  padding: 6px 10px;
-  margin-right: 6px;
-  border-radius: 8px;
-  background: #444;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-.boton-peligro {
-  background: #c62828;
+  border-left: 5px solid #2b7cff;
+  box-shadow: 0 1px 4px rgba(0,0,0,.05);
 }
 
 .texto-chico {
   font-size: .9rem;
-  color: #555;
+  color: #666;
+  display: block;
+  margin-top: 5px;
 }
-
