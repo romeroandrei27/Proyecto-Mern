@@ -1,82 +1,117 @@
 <!DOCTYPE html>
-<html lang="es-MX">
+<html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Plataforma Académica - Entregas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plataforma Académica</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .entregas-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
 
-  <!-- CSS base + específico (buena práctica de cascada) -->
-  <link rel="stylesheet" href="estilos_base.css" />
-  <link rel="stylesheet" href="estilos.css" />
+    .entrega-card {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 1.5rem;
+      background: #f9f9f9;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .entrega-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .entrega-numero {
+      display: inline-block;
+      background: #007bff;
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .entrega-titulo {
+      font-size: 1.25rem;
+      font-weight: bold;
+      margin: 0.5rem 0;
+      color: #333;
+    }
+
+    .entrega-alumno {
+      font-size: 0.95rem;
+      color: #666;
+      margin: 0.5rem 0;
+    }
+
+    .entrega-alumno strong {
+      color: #333;
+    }
+
+    .entrega-descripcion {
+      font-size: 0.9rem;
+      color: #555;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid #ddd;
+      line-height: 1.5;
+    }
+
+    .entrega-descripcion strong {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: #333;
+    }
+  </style>
 </head>
-
 <body>
-  <!-- Accesibilidad: salto directo a la lista -->
-  <a class="sr-only sr-only-focusable" href="#listaEntregas">
-    Ir a la lista de entregas 📋
-  </a>
 
-  <main class="contenedor">
-    <h1>📚 Plataforma Académica</h1>
-    <p class="texto-chico">
-      Entrega de tareas y exámenes (SPA con CRUD)
-    </p>
+  <h1>Plataforma Académica</h1>
 
-    <!-- FORMULARIO DE ENTREGA -->
-    <section class="panel">
-      <form id="formularioEntrega" novalidate>
-        <label for="tituloEntrega">Título de la entrega</label>
-        <input
-          id="tituloEntrega"
-          type="text"
-          placeholder="Ej. Examen Unidad 2"
-          aria-describedby="textoError"
-        />
+  <div class="panel">
+    <form id="formularioEntrega">
+      <label for="tituloEntrega">Título de la entrega:</label>
+      <input
+        type="text"
+        id="tituloEntrega"
+        placeholder="Mínimo 5 caracteres"
+        required
+      />
 
-        <label for="descripcionEntrega">Descripción</label>
-        <textarea
-          id="descripcionEntrega"
-          rows="3"
-          placeholder="Indicaciones o descripción de la tarea"
-          aria-describedby="textoError"
-        ></textarea>
+      <label for="descripcionEntrega">Descripción:</label>
+      <textarea
+        id="descripcionEntrega"
+        placeholder="Opcional"
+      ></textarea>
 
-        <label for="alumnoEntrega">Alumno</label>
-        <input
-          id="alumnoEntrega"
-          type="text"
-          placeholder="Nombre del alumno"
-          aria-describedby="textoError"
-        />
+      <label for="alumnoEntrega">Alumno:</label>
+      <input
+        type="text"
+        id="alumnoEntrega"
+        placeholder="Nombre del alumno"
+        required
+      />
 
-        <div id="textoError" class="error" role="alert"></div>
+      <button type="submit" id="btnGuardar" disabled>
+        Guardar entrega
+      </button>
+    </form>
+  </div>
 
-        <!-- UX: se habilita solo si pasa validación -->
-        <button type="submit" id="btnGuardar" disabled>
-          Guardar entrega
-        </button>
+  <hr class="panel-separacion">
 
-        <p id="mensaje" class="texto-chico" aria-live="polite">
-          Listo.
-        </p>
-      </form>
-    </section>
+  <div class="panel">
+    <h3>Entregas Registradas</h3>
+    <p id="textoVacio">No hay entregas registradas.</p>
+    <div id="listaEntregas" class="entregas-container"></div>
+  </div>
 
-    <!-- LISTA DE ENTREGAS -->
-    <section class="panel panel-separacion">
-      <h2>📋 Entregas registradas</h2>
-
-      <ul id="listaEntregas">
-        <!-- Generado dinámicamente -->
-      </ul>
-
-      <p id="textoVacio" class="texto-chico">
-        Aún no hay entregas registradas.
-      </p>
-    </section>
-  </main>
-
-  <script src="app.js" defer></script>
+  <script src="app.js"></script>
 </body>
 </html>
-
