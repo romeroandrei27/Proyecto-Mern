@@ -1,62 +1,166 @@
+/* RESET */
+* {
+  box-sizing: border-box;
+}
+
+/* FONDO OSCURO */
 body {
-  font-family: Arial, sans-serif;
-  background: #f4f6f8;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: radial-gradient(circle at top, #1f2933, #0f172a);
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  margin: 0;
+  color: #e5e7eb;
+  animation: bgPulse 8s ease-in-out infinite;
 }
 
+/* CONTENEDOR */
 .container {
-  background: #ffffff;
-  padding: 25px;
-  border-radius: 10px;
-  width: 320px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(145deg, #111827, #1f2937);
+  padding: 32px;
+  border-radius: 18px;
+  width: 360px;
+  box-shadow:
+    0 25px 60px rgba(0, 0, 0, 0.7),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+  animation: scaleIn 0.8s ease;
 }
 
+/* TITULOS */
 h2 {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
+  color: #f9fafb;
+  letter-spacing: 0.5px;
+  animation: glowText 2.5s ease-in-out infinite alternate;
 }
 
+/* INPUTS */
 input {
   width: 100%;
-  padding: 8px;
-  margin-bottom: 12px;
+  padding: 12px;
+  margin-bottom: 16px;
+  border-radius: 10px;
+  background: #020617;
+  border: 1px solid #334155;
+  color: #f9fafb;
+  font-size: 14px;
+  transition: all 0.3s ease;
 }
 
+input::placeholder {
+  color: #94a3b8;
+}
+
+input:focus {
+  outline: none;
+  border-color: #818cf8;
+  box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.3);
+  transform: scale(1.02);
+}
+
+/* BOTONES */
 button {
   width: 100%;
-  padding: 10px;
-  background: #007bff;
+  padding: 14px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
   border: none;
   color: white;
   font-size: 16px;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 12px;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+button::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(255,255,255,0.35), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+button:hover::after {
+  opacity: 1;
 }
 
 button:hover {
-  background: #0056b3;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(99, 102, 241, 0.45);
 }
 
+button:active {
+  transform: scale(0.96);
+}
+
+/* CAJA SESIÓN */
 .session-box {
-  background: #e9f5ff;
-  padding: 15px;
-  border-radius: 8px;
+  background: linear-gradient(145deg, #020617, #111827);
+  padding: 18px;
+  border-radius: 14px;
+  margin-top: 12px;
+  animation: slideFade 0.7s ease;
 }
 
 .session-box p {
-  margin: 8px 0;
+  margin: 10px 0;
+  font-size: 14px;
+  color: #e5e7eb;
 }
 
+/* LOGOUT */
 .logout {
-  background: #dc3545;
-  margin-top: 15px;
+  background: linear-gradient(135deg, #ef4444, #f97316);
+  margin-top: 20px;
 }
 
 .logout:hover {
-  background: #b52a37;
+  box-shadow: 0 12px 30px rgba(239, 68, 68, 0.5);
+}
+
+/* ANIMACIONES */
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideFade {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes glowText {
+  from {
+    text-shadow: 0 0 6px rgba(129, 140, 248, 0.4);
+  }
+  to {
+    text-shadow: 0 0 14px rgba(139, 92, 246, 0.9);
+  }
+}
+
+@keyframes bgPulse {
+  0%, 100% {
+    background-size: 100% 100%;
+  }
+  50% {
+    background-size: 120% 120%;
+  }
 }
 
