@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Tablero Kanban</title>
+    <link rel="stylesheet" href="Estilos.css">
+</head>
+<body>
+
+    <header>
+        <h1>Gestor Kanban</h1>
+        <div class="input-group">
+            <input type="text" id="taskInput" placeholder="Nombre de la tarea...">
+            <button onclick="addTask()">+ Añadir Tarea</button>
+        </div>
+        <p id="confirmMessage" class="confirmation-message hidden">✓ ¡Tarea añadida con éxito!</p>
+    </header>
+
+    <div class="kanban-board">
+        <div class="kanban-column" id="pending" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <h2>Pendiente</h2>
+            <span class="task-count">0</span>
+            <div class="kanban-tasks" id="pending-tasks"></div>
+        </div>
+
+        <div class="kanban-column" id="in-progress" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <h2>En Ejecución</h2>
+            <span class="task-count">0</span>
+            <div class="kanban-tasks" id="in-progress-tasks"></div>
+        </div>
+
+        <div class="kanban-column" id="completed" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <h2>Terminado</h2>
+            <span class="task-count">0</span>
+            <div class="kanban-tasks" id="completed-tasks"></div>
+        </div>
+    </div>
+
+    <script src="Logica.js"></script>
+</body>
+</html>
