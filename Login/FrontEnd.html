@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Notas con JWT</title>
+    <style>
+        body { font-family: sans-serif; background: #eee; display: flex; justify-content: center; padding: 50px; }
+        .box { background: white; padding: 20px; border-radius: 10px; width: 350px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .hidden { display: none; }
+        input { width: 90%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; }
+        button { width: 100%; padding: 10px; background: #28a745; color: white; border: none; cursor: pointer; }
+        .nota { border-bottom: 1px solid #eee; padding: 10px 0; }
+    </style>
+</head>
+<body>
+
+    <div id="authBox" class="box">
+        <h2>Login / Registro</h2>
+        <input type="email" id="email" placeholder="Email">
+        <input type="password" id="pass" placeholder="Contraseña">
+        <button onclick="auth('login')">Entrar</button>
+        <button onclick="auth('registro')" style="background:#6c757d; margin-top:5px;">Registrarse</button>
+    </div>
+
+    <div id="notasBox" class="box hidden">
+        <div style="display:flex; justify-content: space-between;">
+            <h3>Mis Notas</h3>
+            <button onclick="logout()" style="width:auto; background:red;">Salir</button>
+        </div>
+        <input type="text" id="txtNota" placeholder="Escribe algo...">
+        <button onclick="crearNota()">Guardar Nota</button>
+        <div id="lista"></div>
+    </div>
+
+<script>
+    const API = 'http://localhost:3000/api';
+
+    async function auth(ruta) {
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('pass').value;
+        
+        try {
+            const res = await fetch(`${API}/auth/${ruta}`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ email, password })
+            });
+            const data = await res.json();
+            
+            if (res.ok && data.token) {
+                localStorage.setItem('token_notas', data.token); // Almacenamiento local
+                render();
+            } else {
+                alert(data.mensaje || 'Registro exitoso, ahora inicia sesión');
+            }
+        } catch (e) { alert('Error de conexión con el servidor'); }
+    }
+
+    async function obtenerNotas() {
+        const token = localStorage.getItem('token_notas');
+        const res = await fetch(`${API}/notas`, {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+        const notas = await res.json();
+        document.getElementById('lista').innerHTML = notas.map(n => `<div class="nota">${n.texto}</div>`).join('');
+    }
+
+    async function crearNota() {
+        const texto = document.getElementById('txtNota').value;
+        const token = localStorage.getItem('token_notas');
+        await fetch(`${API}/notas`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+            body: JSON.stringify({ texto })
+        });
+        document.getElementById('txtNota').value = '';
+        obtenerNotas();
+    }
+
+    function render() {
+        const token = localStorage.getItem('token_notas');
+        if (token) {
+            document.getElementById('authBox').classList.add('hidden');
+            document.getElementById('notasBox').classList.remove('hidden');
+            obtenerNotas();
+        }
+    }
+
+    function logout() { localStorage.removeItem('token_notas'); location.reload(); }
+    render();
+</script>
+</body>
+</html>
